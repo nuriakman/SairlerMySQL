@@ -23,9 +23,9 @@ echo "Sorgu sonucunda $RowCount adet kayıt geldi.";
 // Getirilen kayıtların listelenmesi...
 // Getirilen kayıtların listelenmesi...
 while($row = mysqli_fetch_assoc($rows)){
-  echo "<pre>";print_r($row);
+  extract($row);
+  //echo "<pre>";print_r($row);
   //echo $row["ilce_adi"] ."-----" . $row["ilce_kodu"]. "<br>";
-  //extract($row);
   //$ilce_adi = $row["ilce_adi"];
   //$ilce_kodu = $row["ilce_kodu"];
 
