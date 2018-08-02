@@ -7,6 +7,8 @@ $password = "1234";
 $database = "arac_seferleri";
 $cnnMySQL = mysqli_connect( $host, $user, $password, $database );
 if( mysqli_connect_error() ) die("Veritabanına bağlanılamadı...");
+mysqli_set_charset($cnnMySQL, "utf8");
+
 
 // Veritabanından kayıt çekelim...
 // Veritabanından kayıt çekelim...

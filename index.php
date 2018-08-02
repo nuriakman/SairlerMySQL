@@ -7,6 +7,8 @@ $password = "1234";
 $database = "sairler_db";
 $cnnMySQL = mysqli_connect( $host, $user, $password, $database );
 if( mysqli_connect_error() ) die("Veritabanına bağlanılamadı...");
+mysqli_set_charset($cnnMySQL, "utf8");
+
 ?>
 <!DOCTYPE html>
 <html lang="tr" dir="ltr">
@@ -20,7 +22,7 @@ if( mysqli_connect_error() ) die("Veritabanına bağlanılamadı...");
       <ul>
 
 <?php
-  $SQL      = "SELECT kayit_sair_adi FROM sairler ORDER BY sair_adi";
+  $SQL      = "SELECT kayit_id, sair_adi FROM sairler ORDER BY sair_adi";
   $rows     = mysqli_query($cnnMySQL, $SQL);
   $RowCount = mysqli_num_rows($rows);
 
