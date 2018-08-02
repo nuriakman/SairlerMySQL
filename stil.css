@@ -1,0 +1,28 @@
+body {
+  font-size: 16px;
+  width: 80%;
+  margin: auto auto;
+  line-height: 30px;
+}
+
+.LOGOBASLIK {
+  font-size: 30px;
+  color: red;
+  border-bottom: 2px solid gray;
+  border-top: 2px solid gray;
+  padding: 5px;
+  text-align: center;
+  background-color: #e6e6e6;
+  margin-bottom: 50px;
+}
+
+.HAYATI {
+  text-align: justify;
+  width: 80%;
+  margin: auto auto;
+}
+
+.GERIDONDUGMESI {
+  text-align: right;
+  margin-top: -50px;
+}
