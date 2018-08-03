@@ -29,7 +29,12 @@
 
           while($row = mysqli_fetch_assoc($rows)){
             extract($row);
-            echo "<li><a href='sair.php?sair=$sair_adi&id=$kayit_id'>$sair_adi</a></li>";
+            echo "<li>";
+            if( $_SESSION["GIRISYAPILDI"] == 1 ) {
+              echo "<a href='yonetim.sair.duzenle.php?id=$kayit_id'><img src='img/duzenle.png' width=20></a>";
+            }
+            echo "<a href='sair.php?sair=$sair_adi&id=$kayit_id'>$sair_adi</a>";
+            echo "</li>";
           }
 
         ?>
@@ -38,7 +43,7 @@
 
       <?php
         if( $_SESSION["GIRISYAPILDI"] == 1 ) { // Oturum açılmış...
-          echo "<p><a href='yonetim.sair.ekle.php'>Yeni Şair Ekle</a></p>";
+          echo "<p><a href='yonetim.sair.ekle.php'><img src='img/yeni.png' align='top'>Yeni Şair Ekle</a></p>";
           echo "<p><a href='oturumu.kapat.php'>Oturumu Kapat</a></p>";
         } else {
           echo "<p><a href='giris.yap.php'>Giriş Yap</a></p>";

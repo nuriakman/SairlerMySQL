@@ -17,19 +17,26 @@
     $KParola  = $_POST["kullanici_parola"];
 
     $SQL      = "SELECT * FROM kullanicilar
-                WHERE kullanici_adi='$KAdi' and
-                kullanici_parola='$KParola'  and
-                aktif = '1'         ";
+                 WHERE kullanici_adi='$KAdi' and kullanici_parola='$KParola' ";
     $rows     = mysqli_query($cnnMySQL, $SQL); // SORGUYU ÇALIŞTIR ve SONUCUNU GETİR
     $RowCount = mysqli_num_rows($rows); // Cevabın kaç satırı olduğunu öğren
+    $row      = mysqli_fetch_assoc($rows); // Sorgu sonucu gelen SATIRI ÇEK!
 
-    if($RowCount == 1) {
+    if($RowCount == 1 and $row["aktif"] == 1) {
          $_SESSION["GIRISYAPILDI"] = 1;
          header("Location: index.php");
          die();
-       } else {
-         $MESAJ = "Hatalı giriş!";
-       }
+    }
+
+    if($RowCount == 1 and $row["aktif"] == 0) {
+        $MESAJ = "Hesabınız aktif DEĞİL!<br><br><b>SEBEP: </b>" . $row["pasif_aciklamasi"];
+    }
+
+    if($RowCount == 0) {
+        $MESAJ = "Giriş bilgileriniz hatalı!";
+    }
+
+
   }
 
 ?>
