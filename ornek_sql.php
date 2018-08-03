@@ -13,8 +13,8 @@ mysqli_set_charset($cnnMySQL, "utf8");
 // Veritabanından kayıt çekelim...
 // Veritabanından kayıt çekelim...
 $SQL      = "SELECT * FROM ilceler WHERE il_kodu=34 ORDER BY ilce_adi";
-$rows     = mysqli_query($cnnMySQL, $SQL);
-$RowCount = mysqli_num_rows($rows);
+$rows     = mysqli_query($cnnMySQL, $SQL); // SORGUYU ÇALIŞTIR ve SONUCUNU GETİR
+$RowCount = mysqli_num_rows($rows); // Cevabın kaç satırı olduğunu öğren
 
 // Aranılan kayıt var mı? kontrolü...
 // Aranılan kayıt var mı? kontrolü...
@@ -25,18 +25,16 @@ echo "Sorgu sonucunda $RowCount adet kayıt geldi.";
 // Getirilen kayıtların listelenmesi...
 // Getirilen kayıtların listelenmesi...
 while($row = mysqli_fetch_assoc($rows)){
-  extract($row);
-  //echo "<pre>";print_r($row);
-  //echo $row["ilce_adi"] ."-----" . $row["ilce_kodu"]. "<br>";
-  //$ilce_adi = $row["ilce_adi"];
-  //$ilce_kodu = $row["ilce_kodu"];
-
-  //echo "$il_kodu - $ilce_adi - <br>";
+  extract($row); // DİZİ olarak gelen $row değişkeninin her bir elemanını bağımsız değişken yapalım.
 } // while
 
 
-
-
+// Sorgu sonucu SADECE 1 KAYIT geliyorsa:
+$SQL      = "SELECT * FROM sairler WHERE sair_id = '2' ";
+$rows     = mysqli_query($cnnMySQL, $SQL); // SORGUYU ÇALIŞTIR ve SONUCUNU GETİR
+$row      = mysqli_fetch_assoc($rows); // SADECE 1 SATIR GETİR!!!
+extract($row);
+echo "Bu şair $RowCount defa listelenmiştir.";
 
 
 

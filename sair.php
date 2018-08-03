@@ -9,15 +9,22 @@ $cnnMySQL = mysqli_connect( $host, $user, $password, $database );
 if( mysqli_connect_error() ) die("Veritabanına bağlanılamadı...");
 mysqli_set_charset($cnnMySQL, "utf8");
 
-// Sayaç Artır
+// Sayaç Artır, Yöntem 1
+$id       =  $_GET["id"];
+$SQL      = "UPDATE sairler SET sayac=sayac+1 WHERE kayit_id = '$id' ";
+
+// Sayaç Artır, Yöntem 2
 $SQL      = sprintf("UPDATE sairler SET sayac=sayac+1 WHERE kayit_id = '%s' ", $_GET["id"]);
+
+// Şimdi de sayacı artıralım...
 $rows     = mysqli_query($cnnMySQL, $SQL);
 
-// Şair bilgilerini getir
+
+// 1 Şair için bilgilerini getir
 $SQL      = sprintf("SELECT * FROM sairler WHERE kayit_id = '%s' ", $_GET["id"]);
 $rows     = mysqli_query($cnnMySQL, $SQL);
 $RowCount = mysqli_num_rows($rows);
-$row = mysqli_fetch_assoc($rows);
+$row      = mysqli_fetch_assoc($rows);
 extract($row);
 
 require_once ('Slimdown.php'); // KAYNAK: https://gist.github.com/jbroadway/2836900

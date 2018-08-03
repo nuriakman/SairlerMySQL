@@ -1,13 +1,14 @@
 <?php
-## Veritabanına bağlantı kuralım...
-## Veritabanına bağlantı kuralım...
-$host     = "localhost";
-$user     = "root";
-$password = "1234";
-$database = "sairler_db";
-$cnnMySQL = mysqli_connect( $host, $user, $password, $database );
-if( mysqli_connect_error() ) die("Veritabanına bağlanılamadı...");
-mysqli_set_charset($cnnMySQL, "utf8");
+  @session_start();
+  ## Veritabanına bağlantı kuralım...
+  ## Veritabanına bağlantı kuralım...
+  $host     = "localhost";
+  $user     = "root";
+  $password = "1234";
+  $database = "sairler_db";
+  $cnnMySQL = mysqli_connect( $host, $user, $password, $database );
+  if( mysqli_connect_error() ) die("Veritabanına bağlanılamadı...");
+  mysqli_set_charset($cnnMySQL, "utf8");
 
 ?>
 <!DOCTYPE html>
@@ -21,19 +22,36 @@ mysqli_set_charset($cnnMySQL, "utf8");
     <h1 class="LOGOBASLIK">Türk Şairleri</h1>
       <ul>
 
-<?php
-  $SQL      = "SELECT kayit_id, sair_adi FROM sairler ORDER BY sair_adi";
-  $rows     = mysqli_query($cnnMySQL, $SQL);
-  $RowCount = mysqli_num_rows($rows);
+        <?php
+          $SQL      = "SELECT kayit_id, sair_adi FROM sairler ORDER BY sair_adi";
+          $rows     = mysqli_query($cnnMySQL, $SQL);
+          $RowCount = mysqli_num_rows($rows);
 
-  while($row = mysqli_fetch_assoc($rows)){
-    extract($row);
-    echo "<li><a href='sair.php?sair=$sair_adi&id=$kayit_id'>$sair_adi</a></li>";
-  }
+          while($row = mysqli_fetch_assoc($rows)){
+            extract($row);
+            echo "<li><a href='sair.php?sair=$sair_adi&id=$kayit_id'>$sair_adi</a></li>";
+          }
 
-?>
+        ?>
+
       </ul>
 
+      <?php
+        if( $_SESSION["GIRISYAPILDI"] == 1 ) { // Oturum açılmış...
+          echo "<p><a href='yonetim.sair.ekle.php'>Yeni Şair Ekle</a></p>";
+          echo "<p><a href='oturumu.kapat.php'>Oturumu Kapat</a></p>";
+        } else {
+          echo "<p><a href='giris.yap.php'>Giriş Yap</a></p>";
+        }
+      ?>
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
 
 
 
