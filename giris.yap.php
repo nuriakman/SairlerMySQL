@@ -15,7 +15,9 @@
     $row      = mysqli_fetch_assoc($rows); // Sorgu sonucu gelen SATIRI ÇEK!
 
     if($RowCount == 1 and $row["aktif"] == 1) {
-         $_SESSION["GIRISYAPILDI"] = 1;
+         $_SESSION["GIRISYAPILDI"]      = 1;
+         $_SESSION["KULLANICI_TAM_ADI"] = $row["tam_adi"];
+         $_SESSION["KULLANICI_ID"]      = $row["kayit_id"];
          header("Location: basarili.php");
          die();
     }

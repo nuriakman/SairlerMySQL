@@ -14,11 +14,18 @@ if(isset($_POST["sair_adi"])) {
     $SBilgi   = $_POST["sair_bilgileri"];
     $EklemeTarihi = date("Y-m-d H:i:s");
 
+    $EkleID  = $_SESSION["KULLANICI_ID"];
+    $EkleADI = $_SESSION["KULLANICI_TAM_ADI"];
+
     $SQL      = "INSERT INTO sairler
                  SET
                     sair_adi = '$SAdi',
                     sair_bilgileri = '$SBilgi',
-                    ekleme_tarihi = '$EklemeTarihi'
+                    ekleme_tarihi = '$EklemeTarihi',
+                    ekleyen_id = '$EkleID',
+                    ekleyen_adi = '$EkleADI',
+                    guncelleyen_id = '$EkleID',
+                    guncelleyen_adi = '$EkleADI'
                 ";
     $rows     = mysqli_query($cnnMySQL, $SQL); // SORGUYU ÇALIŞTIR
     header("Location: basarili.php");

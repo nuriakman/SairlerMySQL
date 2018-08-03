@@ -14,6 +14,9 @@
     $KayitID  = $_POST["kayit_id"];
     $Onay     = $_POST["onay"];
 
+    $GuncelleID  = $_SESSION["KULLANICI_ID"];
+    $GuncelleADI = $_SESSION["KULLANICI_TAM_ADI"];
+
     if($Onay == "SİL") {
 
         $SQL = "DELETE FROM sairler WHERE kayit_id = '$KayitID' ";
@@ -22,11 +25,15 @@
         $SQL  = "UPDATE sairler
                  SET
                     sair_adi = '$SAdi',
-                    sair_bilgileri = '$SBilgi'
+                    sair_bilgileri = '$SBilgi',
+                    guncelleyen_id = '$GuncelleID',
+                    guncelleyen_adi = '$GuncelleADI'
                   WHERE kayit_id = '$KayitID'     ";
     }
 
     $rows     = mysqli_query($cnnMySQL, $SQL); // SORGUYU ÇALIŞTIR
+    if($rows == false) die("<h1>SQL Çalıştırılamadı...</h1>");
+
     header("Location: basarili.php");
     die();
   }
