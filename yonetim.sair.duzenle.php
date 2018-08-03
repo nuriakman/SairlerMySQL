@@ -1,31 +1,31 @@
 <?php
   @session_start();
   if( $_SESSION["GIRISYAPILDI"] != 1 ) {
-    die("Yetkili değilsiniz!");
+    header("Location: yetkili.degilsiniz.php");
+    die();
   }
-  ## Veritabanına bağlantı kuralım...
-  ## Veritabanına bağlantı kuralım...
-  $host     = "localhost";
-  $user     = "root";
-  $password = "1234";
-  $database = "sairler_db";
-  $cnnMySQL = mysqli_connect( $host, $user, $password, $database );
-  if( mysqli_connect_error() ) die("Veritabanına bağlanılamadı...");
-  mysqli_set_charset($cnnMySQL, "utf8");
 
+  require("inc_config.php");
 
   if(isset($_POST["sair_adi"])) {
 
     $SAdi     = $_POST["sair_adi"];
     $SBilgi   = $_POST["sair_bilgileri"];
     $KayitID  = $_POST["kayit_id"];
+    $Onay     = $_POST["onay"];
 
-    $SQL      = "UPDATE sairler
+    if($Onay == "SİL") {
+
+        $SQL = "DELETE FROM sairler WHERE kayit_id = '$KayitID' ";
+
+    } else {
+        $SQL  = "UPDATE sairler
                  SET
                     sair_adi = '$SAdi',
                     sair_bilgileri = '$SBilgi'
-                  WHERE kayit_id = '$KayitID'
-                ";
+                  WHERE kayit_id = '$KayitID'     ";
+    }
+
     $rows     = mysqli_query($cnnMySQL, $SQL); // SORGUYU ÇALIŞTIR
     header("Location: basarili.php");
     die();
@@ -63,11 +63,16 @@
           Şair Bilgileri:<br>
           <textarea name="sair_bilgileri" rows="8" cols="80"><?php echo $row["sair_bilgileri"]; ?></textarea>
       </p>
+      <p>Bu şairi silmek için SİL yazınız: <input type="text" name="onay"> </p>
 
     </form>
 
 
-
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
 
 
 

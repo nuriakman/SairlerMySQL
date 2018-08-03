@@ -1,33 +1,25 @@
 <?php
-## Veritabanına bağlantı kuralım...
-## Veritabanına bağlantı kuralım...
-$host     = "localhost";
-$user     = "root";
-$password = "1234";
-$database = "sairler_db";
-$cnnMySQL = mysqli_connect( $host, $user, $password, $database );
-if( mysqli_connect_error() ) die("Veritabanına bağlanılamadı...");
-mysqli_set_charset($cnnMySQL, "utf8");
+  require("inc_config.php");
 
-// Sayaç Artır, Yöntem 1
-$id       =  $_GET["id"];
-$SQL      = "UPDATE sairler SET sayac=sayac+1 WHERE kayit_id = '$id' ";
+  // Sayaç Artır, Yöntem 1
+  $id       =  $_GET["id"];
+  $SQL      = "UPDATE sairler SET sayac=sayac+1 WHERE kayit_id = '$id' ";
 
-// Sayaç Artır, Yöntem 2
-$SQL      = sprintf("UPDATE sairler SET sayac=sayac+1 WHERE kayit_id = '%s' ", $_GET["id"]);
+  // Sayaç Artır, Yöntem 2
+  $SQL      = sprintf("UPDATE sairler SET sayac=sayac+1 WHERE kayit_id = '%s' ", $_GET["id"]);
 
-// Şimdi de sayacı artıralım...
-$rows     = mysqli_query($cnnMySQL, $SQL);
+  // Şimdi de sayacı artıralım...
+  $rows     = mysqli_query($cnnMySQL, $SQL);
 
 
-// 1 Şair için bilgilerini getir
-$SQL      = sprintf("SELECT * FROM sairler WHERE kayit_id = '%s' ", $_GET["id"]);
-$rows     = mysqli_query($cnnMySQL, $SQL);
-$RowCount = mysqli_num_rows($rows);
-$row      = mysqli_fetch_assoc($rows);
-extract($row);
+  // 1 Şair için bilgilerini getir
+  $SQL      = sprintf("SELECT * FROM sairler WHERE kayit_id = '%s' ", $_GET["id"]);
+  $rows     = mysqli_query($cnnMySQL, $SQL);
+  $RowCount = mysqli_num_rows($rows);
+  $row      = mysqli_fetch_assoc($rows);
+  extract($row);
 
-require_once ('Slimdown.php'); // KAYNAK: https://gist.github.com/jbroadway/2836900
+  require_once ('Slimdown.php'); // KAYNAK: https://gist.github.com/jbroadway/2836900
 $SAIR_HAYATI = Slimdown::render($sair_bilgileri);
 
 ?>

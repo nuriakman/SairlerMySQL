@@ -1,6 +1,6 @@
 <?php
   @session_start();
   $_SESSION["GIRISYAPILDI"] = 2345135234;
-  header("Location: index.php");
+  header("Location: basarili.php");
   die();
 ?>

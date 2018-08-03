@@ -1,17 +1,12 @@
 <?php
   @session_start();
   if( $_SESSION["GIRISYAPILDI"] != 1 ) {
-    die("Yetkili değilsiniz!");
+    header("Location: yetkili.degilsiniz.php");
+    die();
   }
-  ## Veritabanına bağlantı kuralım...
-  ## Veritabanına bağlantı kuralım...
-  $host     = "localhost";
-  $user     = "root";
-  $password = "1234";
-  $database = "sairler_db";
-  $cnnMySQL = mysqli_connect( $host, $user, $password, $database );
-  if( mysqli_connect_error() ) die("Veritabanına bağlanılamadı...");
-  mysqli_set_charset($cnnMySQL, "utf8");
+
+  require("inc_config.php");
+
 
 if(isset($_POST["sair_adi"])) {
 
